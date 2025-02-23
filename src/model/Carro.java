@@ -125,4 +125,9 @@ public class Carro implements Comparable<Carro>{
     public int compareTo(Carro otroCarro) {
         return Double.compare(this.precio, otroCarro.precio);
     }
+
+    @Override
+    public String toString() {
+        return marca + " " + modelo + " " + precio + "\n";
+    }
 }
