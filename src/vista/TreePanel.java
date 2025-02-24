@@ -6,6 +6,9 @@ package vista;
 
 import arbol.*;
 import java.awt.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Random;
 import javax.swing.JPanel;
 
 /**
@@ -13,48 +16,81 @@ import javax.swing.JPanel;
  * @author Familia
  */
 public class TreePanel<T extends Comparable<T>> extends JPanel{
-    private Node<T> root;
-    private int nodeRadius = 62;
-    private int horizontalSpacing = 200;
-    private int verticalSpacing = 150;
-    private int nodeCounter = 0;
+   private Node<T> root;
+    private final int nodeRadius = 30;
+    private final int verticalSpacing = 80;
+    private final Map<T, Color> nodeColors = new HashMap<>(); // Mapa para guardar los colores de cada nodo
+    private final Random random = new Random();
 
     public TreePanel(Node<T> root) {
         this.root = root;
     }
-    
-    public void setRoot(Node<T> root){
+
+    public void setRoot(Node<T> root) {
         this.root = root;
+        assignColors(root); // Asignar colores a los nodos
+        repaint();
     }
 
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         if (root != null) {
-            drawTree(g, root, getWidth() / 2, 70, horizontalSpacing);
+            int treeDepth = getTreeDepth(root);
+            int panelWidth = getWidth();
+            int initialSpacing = panelWidth / (int) Math.pow(2, treeDepth - 1);
+            drawTree(g, root, panelWidth / 2, 50, initialSpacing);
         }
     }
 
     private void drawTree(Graphics g, Node<T> node, int x, int y, int spacing) {
-        g.setColor(Color.BLUE);
-        g.fillOval(x - nodeRadius, y - nodeRadius, 2 * nodeRadius, 2 * nodeRadius);
-        g.setColor(Color.WHITE);
-        g.drawString(node.data.toString(), x - 62, y + 5);
+        if (node == null) return;
 
+        // Dibujar nodo con color único
+        g.setColor(nodeColors.get(node.data));
+        g.fillOval(x - nodeRadius, y - nodeRadius, 2 * nodeRadius, 2 * nodeRadius);
+
+        // Dibujar texto centrado dentro del nodo
+        g.setColor(Color.WHITE);
+        String text = node.data.toString();
+        FontMetrics fm = g.getFontMetrics();
+        int textWidth = fm.stringWidth(text);
+        g.drawString(text, x - textWidth / 2, y + fm.getAscent() / 2);
+
+        // Dibujar conexiones
+        g.setColor(Color.BLACK);
         if (node.left != null) {
             int childX = x - spacing;
             int childY = y + verticalSpacing;
-            g.setColor(Color.BLACK);
             g.drawLine(x, y + nodeRadius, childX, childY - nodeRadius);
             drawTree(g, node.left, childX, childY, spacing / 2);
         }
-
         if (node.right != null) {
             int childX = x + spacing;
             int childY = y + verticalSpacing;
-            g.setColor(Color.BLACK);
             g.drawLine(x, y + nodeRadius, childX, childY - nodeRadius);
             drawTree(g, node.right, childX, childY, spacing / 2);
         }
+    }
+
+    // Asignar colores únicos a cada nodo
+    private void assignColors(Node<T> node) {
+        if (node == null) return;
+        if (!nodeColors.containsKey(node.data)) {
+            nodeColors.put(node.data, getRandomColor());
+        }
+        assignColors(node.left);
+        assignColors(node.right);
+    }
+
+    // Generar un color aleatorio
+    private Color getRandomColor() {
+        return new Color(random.nextInt(256), random.nextInt(256), random.nextInt(256));
+    }
+
+    // Método para calcular la profundidad del árbol
+    private int getTreeDepth(Node<T> node) {
+        if (node == null) return 0;
+        return 1 + Math.max(getTreeDepth(node.left), getTreeDepth(node.right));
     }
 }

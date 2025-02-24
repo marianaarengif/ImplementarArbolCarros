@@ -4,11 +4,12 @@
  */
 package vista;
 
-import arbol.*;
+import arbol.BinarySearchTree;
 import java.awt.Dimension;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import model.Carro;
+import arbol.Node;
 
 /**
  *
@@ -28,7 +29,7 @@ public class UI_Carros extends javax.swing.JFrame {
 
         treePanel = new TreePanel<>(root);
         jScrollPane2.setViewportView(treePanel);
-        treePanel.setPreferredSize(new Dimension(1000, 800));
+        treePanel.setPreferredSize(new Dimension(600,800));
     }
 
     /**
@@ -68,6 +69,11 @@ public class UI_Carros extends javax.swing.JFrame {
         jTextField4.setText("matricula");
 
         jTextField5.setText("precio");
+        jTextField5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField5ActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("inOrder Traversal");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -217,21 +223,37 @@ public class UI_Carros extends javax.swing.JFrame {
         String modeloC = jTextField2.getText();
         String colorC = jTextField3.getText();
         String matriculaC = jTextField4.getText();
-        double precioC = 0;
         
-        try{
+        double precioC = 0;
+
+        try {
             precioC = Double.parseDouble(jTextField5.getText());
-        } catch(Exception e){
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());
         }
 
         Carro carroC = new Carro(marcaC, modeloC, colorC, matriculaC, precioC);
         root = BinarySearchTree.insert(root, carroC);
+
+        
+
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        
+          if (root != null) {
+        treePanel.setRoot(root);
+        treePanel.revalidate(); // Refresca el layout
+        treePanel.repaint(); // Redibuja el árbol
+    } else {
+        JOptionPane.showMessageDialog(this, "El árbol está vacío.", "Advertencia", JOptionPane.WARNING_MESSAGE);
+    }
+
+        
         treePanel.setRoot(root);
         treePanel.repaint();
+        
+        
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
@@ -249,6 +271,10 @@ public class UI_Carros extends javax.swing.JFrame {
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton9ActionPerformed
+
+    private void jTextField5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField5ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField5ActionPerformed
 
     /**
      * @param args the command line arguments
