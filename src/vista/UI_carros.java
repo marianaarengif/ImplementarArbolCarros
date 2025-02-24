@@ -6,6 +6,7 @@ package vista;
 
 import arbol.*;
 import java.awt.Dimension;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import model.Carro;
 
@@ -216,7 +217,13 @@ public class UI_Carros extends javax.swing.JFrame {
         String modeloC = jTextField2.getText();
         String colorC = jTextField3.getText();
         String matriculaC = jTextField4.getText();
-        double precioC = Double.parseDouble(jTextField5.getText());
+        double precioC = 0;
+        
+        try{
+            precioC = Double.parseDouble(jTextField5.getText());
+        } catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());
+        }
 
         Carro carroC = new Carro(marcaC, modeloC, colorC, matriculaC, precioC);
         root = BinarySearchTree.insert(root, carroC);
