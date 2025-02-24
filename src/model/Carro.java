@@ -123,11 +123,11 @@ public class Carro implements Comparable<Carro>{
 
     @Override
     public int compareTo(Carro otroCarro) {
-        return Double.compare(this.precio, otroCarro.precio);
+        return this.placa.compareTo(otroCarro.placa);
     }
 
     @Override
     public String toString() {
-        return marca + " " + modelo + " " + precio + "\n";
+        return marca + " " + modelo + " " + placa + "\n";
     }
 }
