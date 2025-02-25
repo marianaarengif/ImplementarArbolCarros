@@ -16,8 +16,7 @@ public class Carro implements Comparable<Carro>{
     private String placa;
     private double precio;
 
-    public Carro() {
-    }
+    public Carro() {}
 
     public Carro(String marca, String modelo, String color, String placa, double precio) {
         this.marca = marca;
@@ -129,5 +128,9 @@ public class Carro implements Comparable<Carro>{
     @Override
     public String toString() {
         return marca + " " + modelo + " " + placa + "\n";
+    }
+
+    boolean getMarcac() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }
