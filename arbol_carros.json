@@ -1,0 +1,72 @@
+{
+  "data": {
+    "marca": "marca",
+    "modelo": "modelo",
+    "color": "color",
+    "placa": "ABC123",
+    "precio": 100.0
+  },
+  "left": {
+    "data": {
+      "marca": "marca",
+      "modelo": "modelo",
+      "color": "color",
+      "placa": "ABC110",
+      "precio": 100.0
+    },
+    "left": {
+      "data": {
+        "marca": "marca",
+        "modelo": "modelo",
+        "color": "color",
+        "placa": "ABC075",
+        "precio": 100.0
+      },
+      "left": {
+        "data": {
+          "marca": "marca",
+          "modelo": "modelo",
+          "color": "color",
+          "placa": "ABC050",
+          "precio": 100.0
+        }
+      }
+    },
+    "right": {
+      "data": {
+        "marca": "marca",
+        "modelo": "modelo",
+        "color": "color",
+        "placa": "ABC115",
+        "precio": 100.0
+      }
+    }
+  },
+  "right": {
+    "data": {
+      "marca": "marca",
+      "modelo": "modelo",
+      "color": "color",
+      "placa": "ABC150",
+      "precio": 100.0
+    },
+    "left": {
+      "data": {
+        "marca": "marca",
+        "modelo": "modelo",
+        "color": "color",
+        "placa": "ABC140",
+        "precio": 100.0
+      }
+    },
+    "right": {
+      "data": {
+        "marca": "marca",
+        "modelo": "modelo",
+        "color": "color",
+        "placa": "ABC160",
+        "precio": 100.0
+      }
+    }
+  }
+}

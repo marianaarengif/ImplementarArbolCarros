@@ -129,8 +129,4 @@ public class Carro implements Comparable<Carro>{
     public String toString() {
         return marca + " " + modelo + " " + placa + "\n";
     }
-
-    boolean getMarcac() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
 }
