@@ -29,7 +29,7 @@ public class UI_Carros extends javax.swing.JFrame {
 
         treePanel = new TreePanel<>(root);
         jScrollPane2.setViewportView(treePanel);
-        treePanel.setPreferredSize(new Dimension(600,800));
+        treePanel.setPreferredSize(new Dimension(800,600));
     }
 
     /**

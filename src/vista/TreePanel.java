@@ -19,7 +19,7 @@ public class TreePanel<T extends Comparable<T>> extends JPanel{
    private Node<T> root;
     private final int nodeRadius = 30;
     private final int verticalSpacing = 80;
-    private final Map<T, Color> nodeColors = new HashMap<>(); // Mapa para guardar los colores de cada nodo
+    private final Map<T, Color> nodeColors = new HashMap<>(); //mapa para guardar colores
     private final Random random = new Random();
 
     public TreePanel(Node<T> root) {
@@ -93,4 +93,19 @@ public class TreePanel<T extends Comparable<T>> extends JPanel{
         if (node == null) return 0;
         return 1 + Math.max(getTreeDepth(node.left), getTreeDepth(node.right));
     }
+    
+    private int getTreeWidth(Node<T> node) {
+        if (node == null) return 0;
+        return 1 + getTreeWidth(node.left) + getTreeWidth(node.right);
+    }
+    
+    // **Ajustar el tamaño del panel basado en la cantidad de nodos**
+    private void updatePanelSize() {
+        int depth = getTreeDepth(root);
+        int width = Math.max(800, getTreeWidth(root) * (nodeRadius * 3)); // Asegurar espacio horizontal
+        int height = depth * verticalSpacing + 100; // Asegurar espacio vertical
+
+        setPreferredSize(new Dimension(width, height));
+        revalidate(); // Forzar actualización de layout
+}
 }
